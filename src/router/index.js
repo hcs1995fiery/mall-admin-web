@@ -301,6 +301,17 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/csv',
+    component: Layout,
+    redirect: '/csv/tsf',
+    children: [{
+      path: 'tsf',
+      name: 'tsf',
+      component: () => import('@/views/csv/index'),
+      meta: {title: 'csv', icon: 'home'}
+    }]
+  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 

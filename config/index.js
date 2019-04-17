@@ -10,7 +10,11 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/': {
+        target: 'http://gitlab.iihwx.com:606/fetching_prd_v1_1/master/%E5%8D%AB%E6%98%9F/%E7%B4%A0%E6%9D%90'
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
