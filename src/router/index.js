@@ -305,12 +305,20 @@ export const constantRouterMap = [
     path: '/csv',
     component: Layout,
     redirect: '/csv/tsf',
+    meta: {title: '卫星', icon: 'sms'},
     children: [{
       path: 'tsf',
       name: 'tsf',
       component: () => import('@/views/csv/index'),
-      meta: {title: 'csv', icon: 'home'}
-    }]
+      meta: {title: '表格转换', icon: 'home'}
+    },
+      {
+        path: 'progress',
+        name: 'progress',
+        component: () => import('@/views/csv/progress'),
+        meta: {title: '进度条', icon: 'home'}
+      }
+    ]
   },
   {path: '*', redirect: '/404', hidden: true}
 ]
