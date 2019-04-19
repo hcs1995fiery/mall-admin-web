@@ -7,8 +7,8 @@
       <el-table-column
         v-for="(item, index) in tableConfig"
         :key="index"
-        :prop="item"
-        :label="item">
+        :prop="Object.keys(item)[0]"
+        :label="item[index]">
       </el-table-column>
     </el-table>
   </div>
@@ -24,33 +24,30 @@
         }
       },
       methods: {
-        getConfig () {
-          this.tableConfig = Object.keys(this.tableData[0])
-        },
         transform () {
           Papaparse.parse('./20180803_rty_bus.csv', {
             download: true,
             complete: (result) => {
-              console.log('r=>', result)
+              console.log('result', result)
               let data = JSON.parse(JSON.stringify(result.data))
-              // let data = result.data
-              // let r = {data: [1,2,3,4,5]}
-              // let data = JSON.parse(JSON.stringify(r.data))
-              // console.log('rd')
-              this.tableConfig = data[0]
-              console.log('tC=>', typeof this.tableConfig)
-              // data.shift()
-              console.log('data=>', data)
+              this.tableConfig = data[0].map((item, index) => {
+                return {[index]: item}
+              })
               data.shift()
-              // data = 1
-              console.log('d==>', data)
-              console.log('TC=>', this.tableConfig)
+              this.tableData = data.map(row => {
+                let tableRow = {}
+                row.map((item, index) => {
+                  tableRow[index] = item
+                })
+                return tableRow
+              })
+              console.log('this.tableData', this.tableData)
             }
           })
         }
       },
       mounted() {
-        this.getConfig()
+        // this.getConfig()
       }
     }
 </script>
